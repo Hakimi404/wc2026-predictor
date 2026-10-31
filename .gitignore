@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,7 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-
-# claude code local settings
-.claude/settings.local.json
+# local agent settings and instructions (next dev regenerates AGENTS.md and CLAUDE.md)
+/.claude/
+/AGENTS.md
+/CLAUDE.md
