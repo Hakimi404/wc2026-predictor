@@ -37,16 +37,14 @@ export default function PredictPage() {
     return predictMatch(home.id, away.id);
   }, [home, away]);
 
-  const [prediction, setPrediction] = useState<Prediction | null>(basePrediction);
+  // A refreshed prediction only applies to the match it was made for.
+  const [refreshed, setRefreshed] = useState<{ matchId: string; prediction: Prediction } | null>(null);
+  const prediction = refreshed?.matchId === matchId ? refreshed.prediction : basePrediction;
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [loadingAnalysis, setLoadingAnalysis] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [pick, setPick] = useState<Pick | null>(null);
   const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    setPrediction(basePrediction);
-  }, [basePrediction]);
 
   useEffect(() => {
     if (!match) return;
@@ -55,6 +53,7 @@ export default function PredictPage() {
       const tips: SavedTip[] = raw ? JSON.parse(raw) : [];
       const existing = tips.find((t) => t.matchId === match.matchId);
       if (existing) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage only exists in the browser, so this runs after hydration.
         setPick(existing.pick);
         setSaved(true);
       }
@@ -96,7 +95,7 @@ export default function PredictPage() {
     if (!home || !away) return;
     const seed = Math.floor(Math.random() * 1_000_000);
     const updated = predictMatchWithSeed(home.id, away.id, seed);
-    if (updated) setPrediction(updated);
+    if (updated) setRefreshed({ matchId, prediction: updated });
   }
 
   async function askClaude() {
