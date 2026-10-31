@@ -44,6 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage only exists in the browser, so this runs after hydration.
     setUser(localStorage.getItem(SESSION_KEY));
   }, []);
 

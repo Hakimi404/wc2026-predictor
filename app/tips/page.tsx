@@ -45,6 +45,7 @@ export default function TipsPage() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(TIPS_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage only exists in the browser, so this runs after hydration.
       setTips(raw ? JSON.parse(raw) : []);
     } catch {
       setTips([]);
