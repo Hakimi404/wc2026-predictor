@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "WC2026 Predictor",
-  description: "FIFA World Cup 2026 match predictions powered by Dixon-Coles, ELO and Monte Carlo",
+  description: "FIFA World Cup 2026 match predictions from Dixon-Coles, ELO, form and head-to-head layers",
 };
 
 export default function RootLayout({

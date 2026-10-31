@@ -36,7 +36,7 @@ const dictionaries: Record<Lang, Record<string, string>> = {
     "home.draw": "Draw",
 
     "predict.winProbability": "Win Probability",
-    "predict.refresh": "🔄 Refresh Prediction (Monte Carlo)",
+    "predict.refresh": "🔄 Refresh Prediction (varies form slightly)",
     "predict.expectedGoalsHome": "Expected Goals (Home)",
     "predict.expectedGoalsAway": "Expected Goals (Away)",
     "predict.confidence": "Confidence",
@@ -93,7 +93,7 @@ const dictionaries: Record<Lang, Record<string, string>> = {
     "auth.title": "Account",
     "auth.loggedInAs": "Logged in as",
 
-    "footer.text": "Predictions powered by Dixon-Coles + ELO + Monte Carlo · Built by Abdullah Al-Hakimi",
+    "footer.text": "Predictions from Dixon-Coles, ELO, form and head-to-head · Built by Abdullah Al-Hakimi",
   },
   de: {
     "nav.home": "Startseite",
@@ -126,7 +126,7 @@ const dictionaries: Record<Lang, Record<string, string>> = {
     "home.draw": "Unentschieden",
 
     "predict.winProbability": "Siegwahrscheinlichkeit",
-    "predict.refresh": "🔄 Vorhersage aktualisieren (Monte Carlo)",
+    "predict.refresh": "🔄 Vorhersage aktualisieren (variiert die Form leicht)",
     "predict.expectedGoalsHome": "Erwartete Tore (Heim)",
     "predict.expectedGoalsAway": "Erwartete Tore (Auswärts)",
     "predict.confidence": "Konfidenz",
@@ -183,7 +183,7 @@ const dictionaries: Record<Lang, Record<string, string>> = {
     "auth.title": "Konto",
     "auth.loggedInAs": "Angemeldet als",
 
-    "footer.text": "Vorhersagen powered by Dixon-Coles + ELO + Monte Carlo · Erstellt von Abdullah Al-Hakimi",
+    "footer.text": "Vorhersagen aus Dixon-Coles, ELO, Form und direkten Duellen · Erstellt von Abdullah Al-Hakimi",
   },
 };
 
@@ -202,6 +202,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(LANG_KEY) as Lang | null;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage only exists in the browser, so this runs after hydration.
     if (stored === "en" || stored === "de") setLangState(stored);
   }, []);
 
